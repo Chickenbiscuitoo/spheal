@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../server/client'
+import axios from 'axios'
 
 export default async function handler(
 	req: NextApiRequest,
@@ -24,7 +25,22 @@ export default async function handler(
 			take: 10,
 		})
 
-		return res.status(200).json(result)
+		const pokeURL = 'https://pokeapi.co/api/v2/pokemon/'
+		const requestsArr = result.map((e) =>
+			axios.get(`${pokeURL}${e.id}`)
+		)
+		const responses = await Promise.all(requestsArr)
+
+		const results = responses.map((p, i) => {
+			return {
+				position: i + 1,
+				id: p.data.id,
+				name: p.data.name,
+				image: p.data.sprites.front_default,
+			}
+		})
+
+		return res.status(200).json(results)
 	} catch (error) {
 		let message = 'Unknown Error'
 

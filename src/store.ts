@@ -1,16 +1,18 @@
 import create from 'zustand'
 import axios from 'axios'
-import { useEffect } from 'react'
 
 interface MonState {
 	pokemons: any[]
+	roundestList: any[]
 	loading: boolean
 	getPokemons: () => void
 	voteFor: (id: number) => void
+	getRoundestList: () => void
 }
 
 const useMonStore = create<MonState>((set) => ({
 	pokemons: [],
+	roundestList: [],
 	loading: false,
 
 	getPokemons: async () => {
@@ -25,6 +27,12 @@ const useMonStore = create<MonState>((set) => ({
 		const data = { id }
 		await axios.patch(url, data)
 		set(() => ({ pokemons: [] }))
+	},
+
+	getRoundestList: async () => {
+		const url = 'http://localhost:3000/api/results'
+		const list = await axios.get(url)
+		set(() => ({ roundestList: list.data }))
 	},
 }))
 
