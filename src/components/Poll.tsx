@@ -5,14 +5,19 @@ import useMonStore from '../store'
 import { useEffect } from 'react'
 
 import MonItem from './MonItem'
+import Spinner from './Spinner'
 
 const Poll: NextPage = () => {
-	const { pokemons, getPokemons } = useMonStore()
+	const { pokemons, getPokemons, loading } = useMonStore()
 
 	useEffect(() => {
 		console.log('useEffect executed')
 		getPokemons()
 	}, [])
+
+	if (loading) {
+		return <Spinner />
+	}
 
 	return (
 		<div className={styles.container}>
