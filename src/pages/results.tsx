@@ -14,7 +14,12 @@ const Results: NextPage = () => {
 	}, [])
 
 	const listItems = roundestList.map((item) => (
-		<ListItem key={item.id} id={item.id} />
+		<ListItem
+			key={item.id}
+			position={item.position}
+			name={item.name}
+			image={item.image}
+		/>
 	))
 
 	return (
