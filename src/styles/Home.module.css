@@ -59,6 +59,10 @@
 	margin-left: 0.5rem;
 }
 
+.list {
+	margin-top: 1rem;
+}
+
 @media (prefers-color-scheme: dark) {
 	.card,
 	.footer {

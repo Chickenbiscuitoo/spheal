@@ -5,9 +5,10 @@ import { AiFillGithub } from 'react-icons/ai'
 import useMonStore from '../store'
 import { useEffect } from 'react'
 import ListItem from '../components/ListItem'
+import Spinner from '../components/Spinner'
 
 const Results: NextPage = () => {
-	const { roundestList, getRoundestList } = useMonStore()
+	const { roundestList, getRoundestList, loading } = useMonStore()
 
 	useEffect(() => {
 		getRoundestList()
@@ -35,7 +36,11 @@ const Results: NextPage = () => {
 				<p className={styles.description}>
 					Top 10 roundest pokemons
 				</p>
-				<div className={styles.list}>{listItems}</div>
+				{loading ? (
+					<Spinner />
+				) : (
+					<div className={styles.list}>{listItems}</div>
+				)}
 			</main>
 
 			<footer className={styles.footer}>

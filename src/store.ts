@@ -30,9 +30,10 @@ const useMonStore = create<MonState>((set) => ({
 	},
 
 	getRoundestList: async () => {
+		set(() => ({ loading: true }))
 		const url = 'http://localhost:3000/api/results'
 		const list = await axios.get(url)
-		set(() => ({ roundestList: list.data }))
+		set(() => ({ roundestList: list.data, loading: false }))
 	},
 }))
 
