@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { AiFillGithub } from 'react-icons/ai'
+import Poll from '../components/Poll'
 
 const Home: NextPage = () => {
 	return (
@@ -17,6 +18,8 @@ const Home: NextPage = () => {
 				<p className={styles.description}>
 					Vote below to find the roundest pokemon!
 				</p>
+
+				<Poll />
 			</main>
 
 			<footer className={styles.footer}>
