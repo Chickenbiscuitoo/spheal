@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import { AiFillGithub } from 'react-icons/ai'
 import useMonStore from '../store'
@@ -36,6 +37,11 @@ const Results: NextPage = () => {
 				<p className={styles.description}>
 					Top 10 roundest pokemons
 				</p>
+
+				<Link href="/">
+					<a className={styles.link}>vote</a>
+				</Link>
+
 				{loading ? (
 					<Spinner />
 				) : (
