@@ -1,21 +1,30 @@
 import { NextPage } from 'next'
 import styles from '../styles/Poll.module.css'
 
+import useMonStore from '../store'
+
 interface MonItemProps {
-	mon: any
+	id: number
+	name: string
+	image: string
 }
 
-const MonItem: NextPage<MonItemProps> = ({ mon }) => {
-	const monImg = mon?.sprites.front_default
+const MonItem: NextPage<MonItemProps> = ({ id, name, image }) => {
+	const { voteFor, getPokemons } = useMonStore()
+
+	const handleClick = () => {
+		voteFor(id)
+		getPokemons()
+	}
 
 	return (
 		<div className={styles.item_container}>
 			<div className={styles.item}>
-				<h2>{mon?.name}</h2>
-				<img src={monImg} />
+				<h2>{name}</h2>
+				<img src={image} />
 			</div>
 			<div className={styles.btn}>
-				<p>ROUNDER</p>
+				<p onClick={handleClick}>ROUNDER</p>
 			</div>
 		</div>
 	)

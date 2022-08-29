@@ -68,20 +68,18 @@ export default async function handler(
 			return res.status(500).json({ message })
 		}
 
-		return res.status(200).json({
-			pokemons: [
-				{
-					id: mon1data.id,
-					name: mon1data.name,
-					image: mon1data.sprites.front_default,
-				},
-				{
-					id: mon2data.id,
-					name: mon2data.name,
-					image: mon2data.sprites.front_default,
-				},
-			],
-		})
+		return res.status(200).json([
+			{
+				id: mon1data.id,
+				name: mon1data.name,
+				image: mon1data.sprites.front_default,
+			},
+			{
+				id: mon2data.id,
+				name: mon2data.name,
+				image: mon2data.sprites.front_default,
+			},
+		])
 	} catch (error) {
 		let message = 'Unknown Error'
 
