@@ -1,4 +1,6 @@
 import { NextPage } from 'next'
+import styles from '../styles/Poll.module.css'
+
 import { useEffect } from 'react'
 
 import useMonStore from '../store'
@@ -12,11 +14,12 @@ const Poll: NextPage = () => {
 		getPokemons()
 	}, [])
 
-	const pokemonItems = pokemons.map((mon) => (
-		<MonItem key={mon.id} mon={mon} />
-	))
-
-	return <div>{pokemons && pokemonItems}</div>
+	return (
+		<div className={styles.container}>
+			<MonItem key={pokemons[0]?.id} mon={pokemons[0]} />
+			<MonItem key={pokemons[1]?.id} mon={pokemons[1]} />
+		</div>
+	)
 }
 
 export default Poll

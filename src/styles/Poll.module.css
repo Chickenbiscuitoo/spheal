@@ -1,0 +1,90 @@
+.container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.item_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 25vw;
+}
+
+.item {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	margin-top: 12vh;
+}
+
+.item img {
+	width: 15rem;
+}
+
+.btn {
+	margin-top: 1rem;
+	color: white;
+	cursor: pointer;
+}
+
+.btn:active {
+	transform: translateY(2px);
+	color: #6993f2;
+}
+
+.btn {
+	line-height: 0;
+	border-style: solid;
+	border-width: 20px;
+	-moz-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+	-webkit-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+	-o-border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+	border-image: url(https://i.imgur.com/sREM8Yn.png) 20 stretch;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.btn p {
+	text-align: center;
+	margin: -20px -20px;
+	line-height: 20px;
+	padding: 10px 20px;
+
+	background: #000000;
+	background: linear-gradient(135deg, transparent 10px, #000000 0) top
+			left,
+		linear-gradient(225deg, transparent 10px, #000000 0) top right,
+		linear-gradient(315deg, transparent 10px, #000000 0) bottom right,
+		linear-gradient(45deg, transparent 10px, #000000 0) bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+}
+
+@media (max-width: 750px) {
+	.container {
+		flex-direction: column;
+	}
+	.item_container {
+		width: 100%;
+	}
+	.item {
+		margin-top: 0;
+	}
+}
+
+@media (max-width: 800px) {
+	.item img {
+		width: 12rem;
+	}
+}
