@@ -24,9 +24,64 @@ export default async function handler(
 			axios.get(mon2),
 		])
 		const [mon1res, mon2res] = responses
-		return res
-			.status(200)
-			.json({ pokemons: [mon1res.data, mon2res.data] })
+		const mon1data = mon1res.data
+		const mon2data = mon2res.data
+
+		try {
+			await prisma.pokemons.upsert({
+				where: {
+					id: mon1data.id,
+				},
+				update: {
+					appeared: {
+						increment: 1,
+					},
+				},
+				create: {
+					id: mon1data.id,
+					appeared: 1,
+					voted_for: 0,
+				},
+			})
+
+			await prisma.pokemons.upsert({
+				where: {
+					id: mon2data.id,
+				},
+				update: {
+					appeared: {
+						increment: 1,
+					},
+				},
+				create: {
+					id: mon2data.id,
+					appeared: 1,
+					voted_for: 0,
+				},
+			})
+		} catch (error) {
+			let message = 'Unknown Error'
+
+			if (error instanceof Error) message = error.message
+			else message = String(error)
+
+			return res.status(500).json({ message })
+		}
+
+		return res.status(200).json({
+			pokemons: [
+				{
+					id: mon1data.id,
+					name: mon1data.name,
+					image: mon1data.sprites.front_default,
+				},
+				{
+					id: mon2data.id,
+					name: mon2data.name,
+					image: mon2data.sprites.front_default,
+				},
+			],
+		})
 	} catch (error) {
 		let message = 'Unknown Error'
 
